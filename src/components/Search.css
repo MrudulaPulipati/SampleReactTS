@@ -1,0 +1,58 @@
+
+.background_display{
+    display: flex;
+    width: 100%;
+    height:300px;
+    background-color:#004578;
+    background-image: url('../images/hero-banner.svg');
+    background-repeat: no-repeat;
+  }
+  
+  .container{
+    padding-left: 4%;
+    padding-top: 2.5%;
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+  }
+  
+  .welcome{
+    padding-top: 2%;
+    display: flex;
+    color: white;
+    font-family: 'Segoe UI', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 16px; 
+  }
+  .question{
+    padding-top: 1%;
+    display: flex;
+    color: white;
+    font-family: 'Segoe UI', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 32px; 
+  }
+  .det{
+    padding-top: 1%;
+    display: flex;
+    color: white;
+    font-family: 'Segoe UI', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 18px; 
+  }
+  .inputContainer{
+    padding-top: 3%;
+    display: flex;
+  }
+  .input {
+    width: 50%;
+    height: 70%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
