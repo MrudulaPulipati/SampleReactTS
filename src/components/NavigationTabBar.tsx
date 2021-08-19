@@ -1,11 +1,11 @@
-import { IStackTokens, Label, Pivot, PivotItem, Stack } from '@fluentui/react';
-import { DefaultButton, IButtonProps, PrimaryButton } from '@fluentui/react/lib/Button';
-import { CommandBar, ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
+import { IStackTokens, Pivot, PivotItem, Stack } from '@fluentui/react';
+import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
+import { ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
 import { Component } from 'react';
-import Search from './Search';
 import './NavigationTabBar.css';
+import Search from './Search';
 
-const overflowProps: IButtonProps = { ariaLabel: 'More commands' };
+// const overflowProps: IButtonProps = { ariaLabel: 'More commands' };
 const stackTokens: IStackTokens = { childrenGap: 20, padding: `0px 10px 0px 0px` };
 
 interface INavigationBarState {
@@ -25,6 +25,9 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
   };
 
   render() {
+    function _alertClicked() {
+      alert('Clicked');
+    }
     return (
       <div>
         <Stack horizontal tokens={stackTokens} horizontalAlign="space-between">
@@ -88,21 +91,16 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
 
 };
 
-function _alertClicked(): void {
-  alert('Clicked');
-}
 const _items: ICommandBarItemProps[] = [
   {
     key: 'q&a',
     text: 'Q&A',
     cacheKey: 'myCacheKey', // changing this key will invalidate this item's cache
-    // iconProps: { iconName: 'Add' },
     href: '',
   },
   {
     key: 'questions',
     text: 'Questions',
-    // iconProps: { iconName: 'Upload' },
     href: '',
   },
   {
@@ -119,12 +117,10 @@ const _items: ICommandBarItemProps[] = [
   }, {
     key: 'feedback',
     text: 'Feedback',
-    // iconProps: { iconName: 'Download' },
     onClick: () => console.log('Feedback'),
   }, {
     key: 'faq&help',
     text: 'FAQ & Help',
-    // iconProps: { iconName: 'Download' },
     onClick: () => console.log('FAQ & Help'),
   },
 ];

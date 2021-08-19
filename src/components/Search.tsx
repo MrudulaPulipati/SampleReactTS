@@ -1,13 +1,13 @@
-import { SearchBox, ISearchBoxStyles } from '@fluentui/react/lib/SearchBox';
-import { Component } from 'react';
-import './Search.css';
 // import Tile from './Tile';
-import { getTheme, IStackTokens, Stack } from '@fluentui/react';
-// import NavigationTabBar from './NavigationTabBar';
+import { ISearchBoxStyles, SearchBox } from '@fluentui/react/lib/SearchBox';
+import { Component } from 'react';
+import ActivityItemDisplay from './ActivityItem';
+import './Search.css';
+import SupportProductsList from './SupportProductsList';
 
-const theme = getTheme();
-const stackTokens: IStackTokens = { childrenGap: 20, padding: `0px 10px 0px 0px` };
-const verticalGapStackTokens: IStackTokens = { childrenGap: 10, padding: 10, };
+// const theme = getTheme();
+// const stackTokens: IStackTokens = { childrenGap: 20, padding: `0px 10px 0px 0px` };
+// const verticalGapStackTokens: IStackTokens = { childrenGap: 10, padding: 10, };
 const searchBoxStyles: Partial<ISearchBoxStyles> = { root: { width: 500 } };
 
 export default class Search extends Component {
@@ -39,7 +39,11 @@ export default class Search extends Component {
                     </div>
                 </div>
 
-                <div>
+                <div className="activity_item_style">
+                    <ActivityItemDisplay></ActivityItemDisplay>
+                </div>
+                <div className="supprt_prdct_bg">
+                    <SupportProductsList></SupportProductsList>
                 </div>
             </div>
         )

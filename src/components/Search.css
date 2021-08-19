@@ -56,3 +56,12 @@
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
   }
+
+  .activity_item_style{
+    margin-bottom: 20px;
+    padding: 10px 0px;
+  }
+
+  .supprt_prdct_bg{
+    background: rgb(243, 242, 241)
+  }
