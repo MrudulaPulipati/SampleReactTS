@@ -152,14 +152,12 @@ export default class ActivityItemDisplay extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className={classNames.stk_wdth}>
-                    <Stack horizontal tokens={stackTokens} horizontalAlign="space-around">
-                        {this.activityItemExamples.map((item: { key: string | number }, index: number) => (
-                            <ActivityItem {...item} key={item.key + 'index' + index} className={classNames.activeItemStyle} />
-                        ))}
-                    </Stack>
-                </div>
+            <div className={classNames.stk_wdth}>
+                <Stack horizontal tokens={stackTokens} horizontalAlign="space-around">
+                    {this.activityItemExamples.map((item: { key: string | number }, index: number) => (
+                        <ActivityItem {...item} key={item.key + 'index' + index} className={classNames.activeItemStyle} />
+                    ))}
+                </Stack>
             </div>
         );
     }
