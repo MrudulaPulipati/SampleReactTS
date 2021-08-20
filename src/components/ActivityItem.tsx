@@ -8,6 +8,7 @@ const classNames = mergeStyleSets({
         padding: '1rem',
         border: '1px solid #ffffff00',
         width: '25%',
+        position: 'relative',
         selectors: {
             ':hover': {
                 boxShadow: '0 6.4px 14.4px 0 #00000021 ,0 1.2px 3.6px 0 #0000001c !important',
@@ -40,7 +41,6 @@ const classNames = mergeStyleSets({
         width: 'calc(100% - 10vw)',
         marginLeft: 'auto',
         marginRight: 'auto',
-        position: 'relative',
     }
 });
 const stackTokens: IStackTokens = { childrenGap: 20, padding: `0px 10px 0px 0px` };

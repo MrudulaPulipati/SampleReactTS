@@ -3,6 +3,7 @@ import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 import { ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
 import { Component } from 'react';
 import './NavigationTabBar.css';
+import QuestionsTab from './QuestionsTab';
 import Search from './Search';
 
 // const overflowProps: IButtonProps = { ariaLabel: 'More commands' };
@@ -64,7 +65,7 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
             )
           } else if (this.state.selectedTabKey === '1') {
             return (
-              <div>You are in Questions tab.</div>
+              <QuestionsTab></QuestionsTab>
             )
           } else if (this.state.selectedTabKey === '2') {
             return (
