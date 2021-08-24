@@ -66,6 +66,8 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
           } else if (this.state.selectedTabKey === '1') {
             return (
               <QuestionsTab></QuestionsTab>
+              // <div>You are in Questions tab.</div>
+
             )
           } else if (this.state.selectedTabKey === '2') {
             return (

@@ -1,5 +1,6 @@
 import { getTheme, IStackTokens, ITheme, mergeStyleSets, Stack } from "@fluentui/react";
 import { Component } from "react";
+import AllQuestionsList from "./AllQuestionsList";
 
 const theme: ITheme = getTheme();
 const { palette, fonts } = theme;
@@ -35,6 +36,9 @@ export default class QuestionsInfo extends Component {
                     </div>
 
                 </Stack>
+                <div>
+                    <AllQuestionsList></AllQuestionsList>
+                </div>
             </div>
         )
     }
