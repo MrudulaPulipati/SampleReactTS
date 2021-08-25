@@ -1,5 +1,6 @@
 import { ISearchBoxStyles, IStackTokens, mergeStyleSets, SearchBox, Stack } from "@fluentui/react";
 import { Component } from "react";
+import PopularTags from "./PopularTags";
 import QuestionsInfo from "./QuestionsInfo";
 
 const classNames = mergeStyleSets({
@@ -58,14 +59,16 @@ export default class QuestionsTab extends Component {
                     </div>
                 </div>
                 <div className={classNames.qustn_info_wdth}>
-                    <Stack key="qs_cntnr" horizontal tokens={stackTokens} horizontalAlign="space-between">
-                        <div className={classNames.qstns_container}>
-                            <QuestionsInfo></QuestionsInfo>
-                        </div>
-                        <div className={classNames.side_cntnr}>
-                            Side Container
-                        </div>
-                    </Stack>
+                    <div>
+                        <Stack key="qs_cntnr" horizontal tokens={stackTokens} horizontalAlign="space-between">
+                            <div className={classNames.qstns_container}>
+                                <QuestionsInfo></QuestionsInfo>
+                            </div>
+                            <div className={classNames.side_cntnr}>
+                                <PopularTags></PopularTags>
+                            </div>
+                        </Stack>
+                    </div>
                 </div>
             </div>
         )

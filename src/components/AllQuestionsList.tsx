@@ -15,16 +15,29 @@ const activityItemExamples = [
     {
         key: 1,
         activityDescription: [
-            <Link
-                key={1}
-                className={classNames.nameText}
-                onClick={() => {
-                    alert('A name was clicked.');
-                }}
-            >
-                Philippe Lampros
-            </Link>,
-            <span key={2}> commented</span>,
+            <div>
+                <Link key={1} className={classNames.nameText} onClick={() => { alert('A name was clicked.'); }}>
+                    WilliePhillips-5484
+                </Link>
+                <span key={2}> asked </span>
+                <span aria-hidden="true" className="">•</span>
+                <span className="" title="Nov 27, 2020 6:41:01 AM"> <time role="presentation" dateTime="2020-11-27T06:41:01.823Z">Nov 27 2020 at 12:11 PM</time> </span>
+                <span aria-hidden="true">| </span>
+                <Link key={3} className={classNames.nameText} onClick={() => { alert('A name was clicked.'); }}>
+                    WenyanZhang-MSFT
+                </Link>
+                <span> commented </span>
+                <span aria-hidden="true" className="">• </span>
+                <span title="Aug 24, 2021 6:40:37 AM">
+                    <time role="presentation" dateTime="2021-08-24T06:40:37.863Z">49 secs ago</time> </span>
+                <div>
+                    <Link key={4} className={classNames.nameText}
+                        onClick={() => { alert('A name was clicked.'); }}>
+                        sqlite-net-pcl query without Class Model
+                    </Link>
+                </div>
+            </div>
+
         ],
         activityIcon: <Icon iconName={'Message'} />,
         comments: [
@@ -45,19 +58,19 @@ const activityItemExamples = [
     {
         key: 2,
         activityDescription: [
-            <Link
-                key={1}
-                className={classNames.nameText}
-                onClick={() => {
-                    alert('A name was clicked.');
-                }}
-            >
-                Lisha Refai
-            </Link>,
-            <span key={2}> deleted </span>,
-            <span key={3} className={classNames.nameText}>
-                DocumentTitle.docx
-            </span>,
+            <div className="">
+                <div className="" style={{ position: 'relative' }}>
+                    <span className=""> <a href="/answers/users/1483843/sakuraime.html" rel="user"><span>sakuraime</span></a> </span>
+                    <span> asked </span>
+                    <span aria-hidden="true" className="">•</span>
+                    <span className="" title="Nov 27, 2020 6:41:01 AM"> <time role="presentation" dateTime="2020-11-27T06:41:01.823Z">Nov 27 2020 at 12:11 PM</time> </span>
+                    <span aria-hidden="true">|</span>
+                    <span className=""> <a href="/answers/users/1483843/sakuraime.html" rel="user"><span>sakuraime</span></a> </span>
+                    <span> commented </span>
+                    <span aria-hidden="true" className="">•</span>
+                    <span title="Aug 24, 2021 6:40:37 AM"> <time role="presentation" dateTime="2021-08-24T06:40:37.863Z">49 secs ago</time> </span>
+                </div>
+            </div>
         ],
         activityIcon: <Icon iconName={'Trash'} />,
         timeStamp: '2 hours ago',

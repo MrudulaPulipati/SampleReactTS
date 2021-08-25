@@ -31,34 +31,37 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
     }
     return (
       <div>
-        <Stack horizontal tokens={stackTokens} horizontalAlign="space-between">
-          {/* <div>
+        {/* <div>
           <CommandBar items={_items} overflowButtonProps={overflowProps} ariaLabel="Inbox actions"
             primaryGroupAriaLabel="navigation actions" farItemsGroupAriaLabel="More actions"
           />
         </div> */}
-          <div>
-            <Pivot aria-label="Large Link Size Pivot Example"
-              onLinkClick={this.handleLinkClick}>
-              <PivotItem headerText="Q&A" itemKey="0"></PivotItem>
-              <PivotItem headerText="Questions" itemKey="1"></PivotItem>
-              <PivotItem headerText="Tags" itemKey="2"></PivotItem>
-              <PivotItem headerText="Users" itemKey="3"></PivotItem>
-              <PivotItem headerText="Feedback" itemKey="4"></PivotItem>
-              <PivotItem headerText="FAQ & Help" itemKey="5"></PivotItem>
-            </Pivot>
-          </div>
-          <Stack horizontal tokens={stackTokens} verticalAlign="center">
+        <div>
+          <Pivot aria-label="Large Link Size Pivot Example"
+            onLinkClick={this.handleLinkClick}>
+            <PivotItem headerText="Q&A" itemKey="0">
+              <Search></Search>
+            </PivotItem>
+            <PivotItem headerText="Questions" itemKey="1">
+              <QuestionsTab></QuestionsTab>
+            </PivotItem>
+            <PivotItem headerText="Tags" itemKey="2">
+            </PivotItem>
+            <PivotItem headerText="Users" itemKey="3"></PivotItem>
+            <PivotItem headerText="Feedback" itemKey="4"></PivotItem>
+            <PivotItem headerText="FAQ & Help" itemKey="5"></PivotItem>
+          </Pivot>
+          <Stack horizontal className="qustn_btn_display" tokens={stackTokens} verticalAlign="center">
             <DefaultButton text="Site feedback" onClick={_alertClicked} />
             <PrimaryButton text="Ask a question" onClick={_alertClicked} allowDisabledFocus />
           </Stack>
-        </Stack>
+        </div>
 
         {/* {(this.state.selectedTabKey) === '0' ? (
             <Search></Search>
           ) : ''} */}
 
-        {(() => {
+        {/* {(() => {
           if (this.state.selectedTabKey === '0') {
             return (
               <Search></Search>
@@ -86,7 +89,7 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
               <div>You are in FAQ & Help tab.</div>
             )
           }
-        })()}
+        })()} */}
       </div>
 
     );
