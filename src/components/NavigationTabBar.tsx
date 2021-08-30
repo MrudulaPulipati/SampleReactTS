@@ -2,6 +2,7 @@ import { IStackTokens, Pivot, PivotItem, Stack } from '@fluentui/react';
 import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 import { ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
 import { Component } from 'react';
+import Feedback from './CaseCreation/Feedback';
 import './NavigationTabBar.css';
 import QuestionsTab from './QuestionsTab';
 import Search from './Search';
@@ -50,6 +51,10 @@ export default class NavigationTabBar extends Component<{}, INavigationBarState>
             <PivotItem headerText="Users" itemKey="3"></PivotItem>
             <PivotItem headerText="Feedback" itemKey="4"></PivotItem>
             <PivotItem headerText="FAQ & Help" itemKey="5"></PivotItem>
+            <PivotItem headerText="Feedback" itemKey="6">
+              <Feedback></Feedback>
+            </PivotItem>
+
           </Pivot>
           <Stack horizontal className="qustn_btn_display" tokens={stackTokens} verticalAlign="center">
             <DefaultButton text="Site feedback" onClick={_alertClicked} />

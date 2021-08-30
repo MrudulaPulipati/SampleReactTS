@@ -1,10 +1,10 @@
-import { getTheme, Icon, IStackTokens, ITheme, Link, mergeStyleSets, Stack } from "@fluentui/react";
+import { Icon, IStackTokens, Link, mergeStyleSets, Stack } from "@fluentui/react";
 import { Component } from "react";
 import { iconDisplay } from "../data/AllQuestionsData";
 import AllQuestionsList from "./AllQuestionsList";
 
-const theme: ITheme = getTheme();
-const { palette, fonts } = theme;
+// const theme: ITheme = getTheme();
+// const { palette, fonts } = theme;
 
 const classNames = mergeStyleSets({
     qustn_header: {
