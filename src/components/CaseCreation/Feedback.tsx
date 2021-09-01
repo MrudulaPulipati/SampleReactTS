@@ -1,4 +1,4 @@
-import { ChoiceGroup, CommandBarButton, IChoiceGroupOption, IStackTokens, ITextFieldStyles, mergeStyleSets, PrimaryButton, Stack, TextField } from "@fluentui/react";
+import { ChoiceGroup, CommandBarButton, IChoiceGroupOption, IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles, IStackTokens, IStyleFunctionOrObject, ITextFieldStyles, mergeStyleSets, PrimaryButton, Stack, TextField } from "@fluentui/react";
 import { Component } from "react";
 import { feedbackDataItems } from "../../data/FeedbackData";
 
@@ -8,6 +8,7 @@ interface IFeedbackChoiceState {
     feedbackTitle?: string;
     feedbackDescription?: string;
     isSubmitButtonDisabled?: boolean;
+    selectedFiles?: any[];
 }
 
 const textStyles: Partial<ITextFieldStyles> = {
@@ -15,8 +16,16 @@ const textStyles: Partial<ITextFieldStyles> = {
         { width: 600 }
     ]
 };
-const stackTokens: IStackTokens = { childrenGap: 20 };
 
+const lablStyles: IStyleFunctionOrObject<IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles> = {
+    labelWrapper: {
+        root: {
+            padding: '0 1rem 2rem',
+
+        }
+    }
+}
+const stackTokens: IStackTokens = { childrenGap: 20 };
 const classNames = mergeStyleSets({
     stk_wdth: {
         maxWidth: 'calc(100% - 10vw)',
@@ -24,11 +33,13 @@ const classNames = mergeStyleSets({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    submitBtn: {
-
-    },
     btnsPadding: {
         padding: '10px 0'
+    },
+    chooseFileStyle: {
+        fontFamily: `"Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif`,
+        fontSize: '14px',
+        paddingBottom: '10px'
     },
     choiceGroupStyle: {
         '.global(.ms-ChoiceField-wrapper .ms-ChoiceField-field .labelWrapper)': {
@@ -57,22 +68,17 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
         this.getChoiceItems();
         this.state = {
             selectedChoiceKey: '1', selectedInnerIssueKey: '-1',
-            feedbackDescription: '', feedbackTitle: '', isSubmitButtonDisabled: true
+            feedbackDescription: '', feedbackTitle: '', isSubmitButtonDisabled: true, selectedFiles: []
         };
     }
 
     getChoiceItems(): void {
         this.feedbackItems.map((fbItem): void => {
-            // imageSrc: '../../images/azure.png',
-            // , styles: {root: {width: 70, height: 70}}
-            // iconProps: { iconName: 'TextDocument' },
-
             const obj = {
                 key: fbItem.id + '',
                 iconProps: { iconName: `${fbItem.iconName}` },
                 imageSize: { width: 55, height: 60 },
-                imageAlt: fbItem.title,
-                text: fbItem.title,
+                imageAlt: fbItem.title, text: fbItem.title,
             };
             this.choiceOptions.push(obj);
             console.log(this.choiceOptions);
@@ -80,10 +86,8 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
     }
 
     onTypeSelectionChange(ev: React.SyntheticEvent<HTMLElement> | undefined, option: IChoiceGroupOption | undefined) {
-        this.setState({
-            selectedChoiceKey: option?.key, selectedInnerIssueKey: '-1',
-            feedbackTitle: '', feedbackDescription: ''
-        });
+        this.clearFeedback();
+        this.setState({ selectedChoiceKey: option?.key });
     }
 
     issueOptions = [
@@ -103,6 +107,7 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
     submitFeedback(): void {
         const headers = {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
         }
         const options = {
             method: 'POST',
@@ -113,10 +118,11 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
                 "ContactID": "/contacts(18e20c30-d7f5-eb11-94ef-00224822ee89)"
             })
         };
-        fetch('/devrel/createcase', options)
+        fetch('https://devrelapi.azurewebsites.net/api/devrel/createcase', options)
             .then(response => response.json())
             .then(response => {
                 // Do something with response.
+                // ?&disable365shell=true
                 // on successful 
                 console.log('inres')
                 this.clearFeedback();
@@ -125,9 +131,19 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
     clearFeedback(): void {
         this.setState({
             selectedChoiceKey: '1', selectedInnerIssueKey: '-1',
-            feedbackDescription: '', feedbackTitle: '', isSubmitButtonDisabled: true
+            feedbackDescription: '', feedbackTitle: '', isSubmitButtonDisabled: true,
+            selectedFiles: []
         });
+    }
 
+    onFileChange(e: any): void {
+        console.log('selectedFiles', this.state.selectedFiles);
+        console.log(e);
+        if (e?.target.files && e?.target.files.length > 0) {
+            this.setState({
+                selectedFiles: e?.target.files
+            });
+        }
     }
     onIssueSelectionChange(ev: React.SyntheticEvent<HTMLElement> | undefined, option: IChoiceGroupOption | undefined) {
         this.setState({ selectedInnerIssueKey: option?.key });
@@ -176,6 +192,22 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
                                 <TextField multiline rows={4} required value={this.state.feedbackDescription}
                                     label="Describe your feedback. If applicable, include steps to replicate your issue"
                                     onChange={this.onChangeFeedbackDesc.bind(this)} styles={textStyles} />
+                                <div className={classNames.btnsPadding}>
+                                    <input type="file" name="file" multiple onChange={this.onFileChange.bind(this)}
+                                        accept="image/gif, image/jpeg, image/jpg, image/png" />
+                                    {/* {(this.state.selectedFiles && this.state.selectedFiles.length > 0) ? (
+                                        <div>
+                                            {this.state.selectedFiles.map(x => {
+                                                <p>{x.name}</p>
+                                            })}
+                                        </div>
+                                    ) : (
+                                        <p>No file chosen</p>
+                                    )} */}
+                                </div>
+                                <div className={`${classNames.chooseFileStyle}`}>
+                                    <span>.jpeg, .jpg, .png or .gif</span>
+                                </div>
                             </Stack>
                         }
                     </div>
@@ -184,7 +216,6 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
                     <Stack horizontal tokens={stackTokens}>
                         <PrimaryButton text="Submit" onClick={this.submitFeedback.bind(this)} allowDisabledFocus
                             disabled={this.state.isSubmitButtonDisabled} />
-                        {/* <DefaultButton text="Clear form" onClick={this._alertClicked} allowDisabledFocus /> */}
                         <CommandBarButton text="Clear form" onClick={this.clearFeedback.bind(this)} />
                     </Stack>
                 </div>
