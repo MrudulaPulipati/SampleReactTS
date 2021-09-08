@@ -2,7 +2,7 @@
   "name": "sample_ts_app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://devrelapi.azurewebsites.net/api",
+  "proxy": "https://devrelapi.azurewebsites.net/api",
   "dependencies": {
     "@fluentui/react": "^8.28.1",
     "@testing-library/jest-dom": "^5.14.1",

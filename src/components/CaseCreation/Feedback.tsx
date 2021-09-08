@@ -1,6 +1,7 @@
 import { ChoiceGroup, CommandBarButton, IChoiceGroupOption, IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles, IStackTokens, IStyleFunctionOrObject, ITextFieldStyles, mergeStyleSets, PrimaryButton, Stack, TextField } from "@fluentui/react";
 import { Component } from "react";
 import { feedbackDataItems } from "../../data/FeedbackData";
+import { fetchWrapper } from "../../Wrapper/FetchWrapper";
 
 interface IFeedbackChoiceState {
     selectedChoiceKey: string | undefined;
@@ -105,28 +106,39 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
     ];
 
     submitFeedback(): void {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        }
-        const options = {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({
-                title: this.state.feedbackTitle,
-                description: this.state.feedbackDescription,
-                "ContactID": "/contacts(18e20c30-d7f5-eb11-94ef-00224822ee89)"
-            })
-        };
-        fetch('https://devrelapi.azurewebsites.net/api/devrel/createcase', options)
-            .then(response => response.json())
-            .then(response => {
-                // Do something with response.
-                // ?&disable365shell=true
-                // on successful 
-                console.log('inres')
+        fetchWrapper.post('/devrel/createcase', {
+            title: this.state.feedbackTitle,
+            description: this.state.feedbackDescription,
+            "ContactID": "/contacts(18e20c30-d7f5-eb11-94ef-00224822ee89)"
+        })
+            .then(data => {
+                console.log('inres -fdbk')
                 this.clearFeedback();
-            });
+            })
+            .catch(error => console.error('There was an error!', error));
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Access-Control-Allow-Origin': '*',
+        // }
+        // const options = {
+        //     method: 'POST',
+        //     headers: headers,
+        //     body: JSON.stringify({
+        //         title: this.state.feedbackTitle,
+        //         description: this.state.feedbackDescription,
+        //         "ContactID": "/contacts(18e20c30-d7f5-eb11-94ef-00224822ee89)"
+        //     })
+        // };
+        // const request = new Request('/devrel/createcase', options);
+        // fetch(request)
+        //     .then(response => response.json())
+        //     .then(response => {
+        //         // Do something with response.
+        //         // ?&disable365shell=true
+        //         // on successful 
+        //         console.log('inres -fdbk')
+        //         this.clearFeedback();
+        //     });
     }
     clearFeedback(): void {
         this.setState({
