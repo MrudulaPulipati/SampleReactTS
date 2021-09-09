@@ -106,7 +106,7 @@ export default class Feedback extends Component<{}, IFeedbackChoiceState> {
     ];
 
     submitFeedback(): void {
-        fetchWrapper.post('/devrel/createcase', {
+        fetchWrapper.post('https://devrelapi.azurewebsites.net/api/devrel/createcase', {
             title: this.state.feedbackTitle,
             description: this.state.feedbackDescription,
             "ContactID": "/contacts(18e20c30-d7f5-eb11-94ef-00224822ee89)"

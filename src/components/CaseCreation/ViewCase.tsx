@@ -1,5 +1,6 @@
-import { DetailsList, IColumn, mergeStyleSets, ScrollablePane, SelectionMode } from "@fluentui/react";
+import { CheckboxVisibility, DetailsList, IColumn, mergeStyleSets, ScrollablePane, SelectionMode } from "@fluentui/react";
 import { Component } from "react";
+import { CasesStatusCodeEnum } from "../../data/CasesStatusCodeEnum";
 import { fetchWrapper } from "../../Wrapper/FetchWrapper";
 
 export interface ICasesState {
@@ -11,19 +12,20 @@ export interface ICasesState {
     announcedMessage?: string;
     allCases: any[]
 }
-
+const statusCodeEnum = CasesStatusCodeEnum;
 const classNames = mergeStyleSets({
     // ':global(.ms-DetailsRow-check.ms-Check-checkHost)': {
     //     height: '100%'
     // },
     posRelative: {
         position: 'relative',
+        height: '100vh'
     },
     scrollPanelStyle: {
         height: '300px'
     },
     detailsListStyle: {
-
+        // overflowY: 'hidden',
         // height: '300px',
         ':global(.ms-List-page)': {
             width: '100%',
@@ -32,9 +34,6 @@ const classNames = mergeStyleSets({
         ':global(.ms-List-cell)': {
             width: '100%',
             padding: '0px',
-            // ':global(.ms-DetailsRow-fields)' : {
-            //     width: 'calc(100%/4)'
-            // }
         },
         ':global(.ms-DetailsList-contentWrapper .ms-List-surface .ms-List-page)': {
             // height: 'auto'
@@ -95,7 +94,7 @@ export default class ViewCase extends Component<{}, ICasesState> {
             data: 'string',
             onColumnClick: this._onColumnClick.bind(this),
             onRender: (item: any) => {
-                return <span>{item.statuscode}</span>;
+                return <span>{statusCodeEnum[item.statuscode]}</span>;
             },
             isPadded: true,
         },
@@ -118,7 +117,7 @@ export default class ViewCase extends Component<{}, ICasesState> {
     }
 
     getAllCases(): void {
-        fetchWrapper.get('/devrel/get')
+        fetchWrapper.get('https://devrelapi.azurewebsites.net/api/devrel/get')
             .then(response => {
                 this.setState({ allCases: response.value });
                 console.log(response.value);
@@ -141,7 +140,7 @@ export default class ViewCase extends Component<{}, ICasesState> {
         return item.key;
     }
     _onItemInvoked(item: any): void {
-        alert(`Item invoked: ${item.name}`);
+        alert(`Item invoked: ${item.title}`);
     }
     _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
         const key = columnKey as keyof T;
@@ -182,11 +181,11 @@ export default class ViewCase extends Component<{}, ICasesState> {
                         compact={false}
                         columns={this.columns}
                         getKey={this._getKey}
-                        setKey="set"
+                        setKey="none"
                         selectionMode={SelectionMode.none}
                         isHeaderVisible={true}
                         onItemInvoked={this._onItemInvoked}
-                        viewport={{ width: 1000, height: 350 }}
+                        checkboxVisibility={CheckboxVisibility.hidden}
                     />
                 </ScrollablePane>
             </div>
