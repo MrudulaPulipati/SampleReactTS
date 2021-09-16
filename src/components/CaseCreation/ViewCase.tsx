@@ -27,20 +27,24 @@ const classNames = mergeStyleSets({
     detailsListStyle: {
         // overflowY: 'hidden',
         // height: '300px',
-        ':global(.ms-List-page)': {
+        ':global(#viewCases .ms-List-page)': {
             width: '100%',
             margin: '0'
         },
-        ':global(.ms-List-cell)': {
+        ':global(#viewCases .ms-List-cell)': {
             width: '100%',
             padding: '0px',
         },
+        // ':global(#viewCases .ms-List-cell .ms-DetailsRow span[role=checkbox].checkCover)': {
+        //    display: 'none',
+        //    border: '0px', width: '0px', height: '0px'
+        // },
         ':global(.ms-DetailsList-contentWrapper .ms-List-surface .ms-List-page)': {
             // height: 'auto'
         }
     }
 })
-const width = (1100 / 4);
+const width = (1000 / 4);
 export default class ViewCase extends Component<{}, ICasesState> {
     constructor(props: any) {
         super(props);
@@ -123,18 +127,6 @@ export default class ViewCase extends Component<{}, ICasesState> {
                 console.log(response.value);
             })
             .catch(error => console.error('There was an error!', error));
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin': '*',
-        // }
-
-        // const request = new Request('/devrel/get', { headers });
-        // fetch(request)
-        //     .then(response => response.json())
-        //     .then(response => {
-        //         this.setState({ allCases: response.value });
-        //         console.log(response.value);
-        //     });
     }
     _getKey(item: any, index?: number): string {
         return item.key;
@@ -174,7 +166,7 @@ export default class ViewCase extends Component<{}, ICasesState> {
 
     render() {
         return (
-            <div className={classNames.posRelative}>
+            <div className={classNames.posRelative} id="viewCases">
                 <ScrollablePane className={classNames.scrollPanelStyle}>
                     <DetailsList className={classNames.detailsListStyle}
                         items={this.state.allCases}
